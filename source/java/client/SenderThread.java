@@ -8,6 +8,7 @@
 package client;
 
 import java.awt.*;
+import javax.swing.*;
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -87,7 +88,7 @@ public class SenderThread extends Thread {
 		this.password = parent.getSTOWPassword();
 		this.authenticate = (username != null) && !username.equals("");
 		if (authenticate) {
-			this.authHeader = "Basic " + Base64.encodeToString((username + ":" + password).getBytes());
+			this.authHeader = "Basic " + org.rsna.util.Base64.encodeToString((username + ":" + password).getBytes());
 		}
 	}
 
@@ -265,6 +266,7 @@ public class SenderThread extends Thread {
 				fileStatus.setText(Color.red, "[ABORTED (daScript)]");
 				return null;
 			}
+			
 			AnonymizerStatus result =
 				DICOMAnonymizer.anonymize(temp, //input file
 										  temp, //output file
@@ -273,6 +275,7 @@ public class SenderThread extends Thread {
 										  integerTable,
 										  false, //keep transfer syntax
 										  false); //do not rename to SOPInstanceUID
+			
 			if (result.isOK()) {
 				try { dob = new DicomObject(temp); }
 				catch (Exception unable) {

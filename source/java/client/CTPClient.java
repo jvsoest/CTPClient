@@ -365,7 +365,7 @@ public class CTPClient extends JFrame implements ActionListener, ComponentListen
 				dialogButton.setEnabled(false);
 				browseButton.setEnabled(false);
 				scpButton.setEnabled(false);
-				sending = true;
+				sending = true;				
 				SenderThread sender = new SenderThread(this);
 				sender.start();
 			}
@@ -576,6 +576,15 @@ public class CTPClient extends JFrame implements ActionListener, ComponentListen
 				}
 			}
 		}
+		
+		if(daLUTProps == null) { daLUTProps = new Properties(); }
+		for(Study study : this.studyList.getStudies()) {
+			if(!daLUTProps.containsKey("ptid/"+study.getPatientId())) {
+				String name = JOptionPane.showInputDialog(this, "Study ID for patient ID " + study.getPatientId());
+				daLUTProps.setProperty("ptid/"+study.getPatientId(), name);
+			}
+		}
+		
 		return daLUTProps;
 	}
 

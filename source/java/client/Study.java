@@ -20,6 +20,7 @@ public class Study implements ActionListener, Comparable<Study> {
 	StudyCheckBox cb = null;
 	StudyName studyName = null;
 	String patientName = null;
+	String patientId = null;
 	String studyDate = null;
 
 	public Study(FileName fileName) {
@@ -29,6 +30,7 @@ public class Study implements ActionListener, Comparable<Study> {
 		patientName = fileName.getPatientName();
 		studyDate = fileName.getStudyDate();
 		studyName = new StudyName(fileName);
+		patientId = fileName.getPatientID();
 		studyName.addActionListener(this);
 		add(fileName);
 	}
@@ -69,6 +71,10 @@ public class Study implements ActionListener, Comparable<Study> {
 
 	public String getPatientName() {
 		return patientName;
+	}
+	
+	public String getPatientId() {
+		return patientId;
 	}
 
 	public String getStudyDate() {
