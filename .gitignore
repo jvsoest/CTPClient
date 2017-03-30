@@ -1,0 +1,5 @@
+products/
+build/
+signed/
+dockerBuild/*.jar
+source/files/*.jks
